@@ -1,0 +1,1 @@
+This is a modified Installer originally made for Optifine. I was too lazy and I wanted to make an installer fast so I just used Optifine's built in one and edited it a lot.

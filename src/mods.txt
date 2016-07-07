@@ -1,0 +1,15 @@
+{
+    "Cosmic Envoy - 1.1": ["CosmicEnvoy-1.1.jar"],
+    "Custom MapWriter - 1.5": ["MapWriter-1.8-1.5.jar"],
+    "Account Manager - 1.6": ["mod_AccountManager_v1.6_mc1.8.litemod"],
+    "Optifine - HD U F8": ["OptiFine_1.8.0_HD_U_F8.jar"],
+    "Chunk Borders - 0.2.2": ["mod_ChunkBorders_0.2.2_mc1.8.litemod"],
+    "Lighting Fix - 1.1": ["mod_LightingFix_1.1_mc1.8.litemod"],
+    "Schematica - 1.7.7.140": ["Schematica-1.8-1.7.7.140-universal.jar", "LunatriusCore-1.8-1.1.2.30-universal.jar"],
+    "Toggle Sneak - 3.1.0": ["ToggleSneak-(1.8)-v3.1.0.jar", "PlayerAPI-1.8-1.4.jar"],
+    "Tabby Chat - 2.0.1": ["TabbyChat-mc1.8-2.0.1.litemod", "MnM-Utils-mc1.8-1.0.litemod"],
+    "5zig - 3.3.7": ["The 5zig Mod v3.3.7-1.8.jar"],
+    "Damage Indicators - 3.3.3": ["[1.8]DamageIndicatorsMod-3.3.3.jar"],
+    "World Downloader": ["mod_WorldDownloader_mc1.8_ab04ab66de-.litemod"],
+	"Cannoning Utilities - 2016.04.21": ["mod_TastyCannoningUtils_2016.04.21_beta_mc1.8.litemod"]
+}
