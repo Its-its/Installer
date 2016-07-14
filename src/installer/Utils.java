@@ -4,21 +4,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
 public class Utils {
@@ -38,10 +30,13 @@ public class Utils {
 		
 		switch (getPlatform()) {
 			case LINUX:
-			case MACOS:
 				workingDirectory = new File(userHome, '.' + applicationName + '/');
 				break;
-				
+			
+			case MACOS:
+				workingDirectory = new File(userHome, MAC_OS_HOME_PREFIX + '/' + applicationName + '/');
+				break;
+			
 			case WINDOWS:
 			case SOLARIS:
 				String applicationData = System.getenv("APPDATA");
@@ -51,11 +46,11 @@ public class Utils {
 					workingDirectory = new File(userHome, '.' + applicationName + '/');
 				}
 				break;
-				
+			
 			case UNKNOWN:
 				workingDirectory = new File(userHome, "Library/Application Support/" + applicationName);
 				break;
-				
+			
 			default:
 				workingDirectory = new File(userHome, applicationName + '/');
 		}

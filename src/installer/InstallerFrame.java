@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 
 import org.json.simple.JSONObject;
@@ -29,6 +30,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class InstallerFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel labelOfVersion = null;
 	private JLabel labelMcVersion = null;
 	private JPanel panelCenter = null;
@@ -56,16 +59,16 @@ public class InstallerFrame extends JFrame {
 	}
 	
 	public InstallerFrame() {
-		initialize();
+		this.initialize();
 	}
 	
 	private void customInit() {
 		try {
-			setDefaultCloseOperation(3);
+			this.setDefaultCloseOperation(3);
 			
-			getButtonInstall().setEnabled(true);
+			this.getButtonInstall().setEnabled(true);
 			
-			getButtonInstall().requestFocus();
+			this.getButtonInstall().requestFocus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -157,19 +160,20 @@ public class InstallerFrame extends JFrame {
 				this.panelCenter = new JPanel();
 				this.panelCenter.setName("PanelCenter");
 				this.panelCenter.setLayout(null);
-				this.panelCenter.add(getLabelOfVersion(), getLabelOfVersion().getName());
-				this.panelCenter.add(getLabelMcVersion(), getLabelMcVersion().getName());
-				this.panelCenter.add(getTextArea(), getTextArea().getName());
+				this.panelCenter.add(this.getLabelOfVersion(), this.getLabelOfVersion().getName());
+				this.panelCenter.add(this.getLabelMcVersion(), this.getLabelMcVersion().getName());
+				this.panelCenter.add(this.getTextArea(), this.getTextArea().getName());
 				
-				json = Installer.getMods();
-				Object[] ats = json.keySet().toArray();
-				for(int i = 0; i < json.keySet().size(); i++) {
-					this.panelCenter.add(createCheckBox("" + ats[i]));
+				this.json = Installer.getMods();
+				Object[] ats = this.json.keySet().toArray();
+				for(int i = 0; i < this.json.keySet().size(); i++) {
+					this.panelCenter.add(this.createCheckBox(ats[i].toString()));
 				}
 			} catch (Throwable ivjExc) {
-				handleException(ivjExc);
+				this.handleException(ivjExc);
 			}
 		}
+		
 		return this.panelCenter;
 	}
 	
@@ -237,10 +241,10 @@ public class InstallerFrame extends JFrame {
 				this.panelContentPane = new JPanel();
 				this.panelContentPane.setName("PanelContentPane");
 				this.panelContentPane.setLayout(new BorderLayout(5, 5));
-				this.panelContentPane.add(getPanelCenter(), "Center");
-				this.panelContentPane.add(getPanelBottom(), "South");
+				this.panelContentPane.add(this.getPanelCenter(), "Center");
+				this.panelContentPane.add(this.getPanelBottom(), "South");
 			} catch (Throwable ivjExc) {
-				handleException(ivjExc);
+				this.handleException(ivjExc);
 			}
 		}
 		return this.panelContentPane;
@@ -248,17 +252,17 @@ public class InstallerFrame extends JFrame {
 
 	private void initialize() {
 		try {
-			setName("Trump");
-			setSize(400, 550);
-			setDefaultCloseOperation(0);
-			//setResizable(false);
-			setTitle("Cosmic ModPack Installer");
-			setContentPane(getPanelContentPane());
-			initConnections();
+			this.setName("Trump");
+			this.setSize(400, 555);
+			this.setDefaultCloseOperation(0);
+			this.setResizable(false);
+			this.setTitle("Cosmic ModPack Installer");
+			this.setContentPane(getPanelContentPane());
+			this.initConnections();
 		} catch (Throwable ivjExc) {
-			handleException(ivjExc);
+			this.handleException(ivjExc);
 		}
-		customInit();
+		this.customInit();
 	}
 
 	public void onInstall() {
@@ -272,13 +276,11 @@ public class InstallerFrame extends JFrame {
 			
 			Installer.doInstall(names);
 			
-			Utils.showMessage(
-					  "The Cosmic Mod Pack was successfully installed.\n"
-					+ "Please use the profile name for liteloader to launch Minecraft from now on.");
+			Utils.showMessage("The Cosmic Mod Pack was successfully installed.\nPlease use the profile name for liteloader to launch Minecraft from now on.");
 			
-			dispose();
+			this.dispose();
 		} catch (Exception e) {
-			handleException(e);
+			this.handleException(e);
 		}
 	}
 
@@ -319,10 +321,10 @@ public class InstallerFrame extends JFrame {
 				this.textArea.setLineWrap(true);
 				this.textArea.setOpaque(false);
 				this.textArea.setPreferredSize(new Dimension(365, 44));
-				this.textArea.setText("This installer will install whatever mods you want and install Forge/Liteloader for you.");
+				this.textArea.setText("Lets help you install the mods you want to use and install Forge/LiteLoader.");
 				this.textArea.setWrapStyleWord(true);
 			} catch (Throwable ivjExc) {
-				handleException(ivjExc);
+				this.handleException(ivjExc);
 			}
 		}
 		return this.textArea;
@@ -339,6 +341,7 @@ public class InstallerFrame extends JFrame {
 		}
 		return this.fileField;
 	}
+	
 	private JButton getFileButton() {
 		if (this.button == null) {
 			this.button = new JButton("...");

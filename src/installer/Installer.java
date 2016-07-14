@@ -1,32 +1,17 @@
 package installer;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONWriter;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-//TODO: DAMAGE INDICATORS, TNT BREADCRUMBS
 public class Installer {
 	public static File workingDirectory = null;
 	static String VERSION = "1.8";
@@ -36,17 +21,18 @@ public class Installer {
 	public static void doInstall(List<String> toInstall) throws Exception {
 		File dirMc = Installer.workingDirectory;
 		Utils.dbg("Dir minecraft: " + dirMc);
+		
 		File dirMcLib = new File(dirMc, "libraries");
 		Utils.dbg("Dir libraries: " + dirMcLib);
+		
 		File dirMcVers = new File(dirMc, "versions");
 		Utils.dbg("Dir versions: " + dirMcVers);
-		File dirMcMods = new File(dirMc, "mods/" + VERSION);
+		
+		File dirMcMods = new File(dirMc, "mods/" + Installer.VERSION);
 		dirMcMods.mkdirs();
 		
-		if(!(new File(dirMcVers, VERSION).exists())) {
-			Utils.showErrorMessage(
-					  "Minecraft version not found: " + VERSION + "\n"
-					+ "You need to start the version " + VERSION + " manually once.");
+		if(!(new File(dirMcVers, Installer.VERSION).exists())) {
+			Utils.showErrorMessage("Minecraft version not found: " + Installer.VERSION + "\n" + "You need to start the version " + Installer.VERSION + " manually once.");
 			throw new RuntimeException("QUIET");
 		}
 		
@@ -56,17 +42,17 @@ public class Installer {
 			JSONArray mods = (JSONArray)new JSONParser().parse(array.get(i).toString());
 			
 			for(int o = 0; o < mods.size(); o++) {
-				Utils.dbg(" - " + exportResource(dirMcMods, "/mods/" + mods.get(o).toString(), mods.get(o).toString()));
+				Utils.dbg(" - " + Installer.exportResource(dirMcMods, "/mods/" + mods.get(o).toString(), mods.get(o).toString()));
 			}
 		}
 		
-		Utils.dbg("Minecraft Version: " + VERSION);
+		Utils.dbg("Minecraft Version: " + Installer.VERSION);
 		
-		copyInstallers(dirMc);
+		Installer.copyInstallers(dirMc);
 		
 		try {
-			Process process = Runtime.getRuntime().exec("java -jar " + dirMc.getPath().replace('\\', '/') + "/installers/" + FG_INSTALLER);
-			Utils.showMessage("Please Install Forge if you don't have it already.");
+			Process process = Runtime.getRuntime().exec("java -jar " + dirMc.getPath().replace('\\', '/') + "/installers/" + Installer.FG_INSTALLER);
+			Utils.showMessage("Please Install Forge if you don't have this version already.");
 			process.waitFor();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
@@ -74,7 +60,7 @@ public class Installer {
 		
 		
 		try {
-			Process process = Runtime.getRuntime().exec("java -jar " + dirMc.getPath().replace('\\', '/') + "/installers/" + LL_INSTALLER);
+			Process process = Runtime.getRuntime().exec("java -jar " + dirMc.getPath().replace('\\', '/') + "/installers/" + Installer.LL_INSTALLER);
 			Utils.showMessage(
 					  "Please Install Liteloader if you don't have it already running with forge.\n"
 					+ "Make sure liteloader is being extended to the forge version you're using.\n"
@@ -124,8 +110,8 @@ public class Installer {
 		File install = new File(dirMcLib, "installers");
 		if(!install.exists()) install.mkdirs();
 
-		Utils.dbg(" - " + exportResource(install, "/lib/" + FG_INSTALLER, FG_INSTALLER));
-		Utils.dbg(" - " + exportResource(install, "/lib/" + LL_INSTALLER, LL_INSTALLER));
+		Utils.dbg(" - " + Installer.exportResource(install, "/lib/" + Installer.FG_INSTALLER, Installer.FG_INSTALLER));
+		Utils.dbg(" - " + Installer.exportResource(install, "/lib/" + Installer.LL_INSTALLER, Installer.LL_INSTALLER));
 	}
 
 	public static JSONObject getMods() throws IOException, ParseException {
