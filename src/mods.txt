@@ -1,5 +1,5 @@
 {
-    "Cosmic Envoy - 1.1": ["CosmicEnvoy-1.1.jar"],
+    "Cosmic Envoy - 1.2": ["CosmicEnvoy-1.8-1.2.jar"],
     "Custom MapWriter - 1.5": ["MapWriter-1.8-1.5.jar"],
     "Account Manager - 1.6": ["mod_AccountManager_v1.6_mc1.8.litemod"],
     "Optifine - HD U F8": ["OptiFine_1.8.0_HD_U_F8.jar"],
